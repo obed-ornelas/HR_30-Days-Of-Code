@@ -41,11 +41,13 @@ function parseAndPrint(number){
     try {
         const parsed = parseInt(number, 10);
 
-        (!parsed || isNaN(parsed)) && fakeFunction();
+        if(isNaN(parsed)){
+            throw TypeError("not a number");
+        }
 
         console.log(parsed);
     } catch(e) {
-        console.log("Bad String");
+        console.error("Bad String");
     }
 }
 
