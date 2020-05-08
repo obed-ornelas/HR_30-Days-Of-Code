@@ -18,16 +18,27 @@ function readLine() {
 }
 
 //Write your code here
+class Calculator {
+    power(x,y) {
+        if(x < 0 || y < 0) {
+            throw "n and p should be non-negative";
+        }
+
+        return Math.pow(x, y);
+    }
+}
 
 function main(){
-    var myCalculator=new Calculator();
-    var T=parseInt(readLine());
+    const myCalculator = new Calculator();
+    let T = parseInt(readLine());
+
     while(T-->0){
-        var num = (readLine().split(" "));
+        let num = (readLine().split(" "));
+
         try{
-            var n=parseInt(num[0]);
-            var p=parseInt(num[1]);
-            var ans=myCalculator.power(n,p);
+            let n = parseInt(num[0]);
+            let p = parseInt(num[1]);
+            let ans = myCalculator.power(n,p);
             console.log(ans);
         }
         catch(e){
