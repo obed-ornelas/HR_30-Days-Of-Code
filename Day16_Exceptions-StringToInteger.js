@@ -1,9 +1,9 @@
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
+let input_stdin = "";
+let input_stdin_array = "";
+let input_currentline = 0;
 
 process.stdin.on('data', function (data) {
     input_stdin += data;
@@ -11,7 +11,7 @@ process.stdin.on('data', function (data) {
 
 process.stdin.on('end', function () {
     input_stdin_array = input_stdin.split("\n");
-    main();    
+    main();
 });
 
 function readLine() {
@@ -37,6 +37,20 @@ function readLine() {
  * }
  */
 
+function parseAndPrint(number){
+    try {
+        const parsed = parseInt(number, 10);
+
+        (!parsed || isNaN(parsed)) && fakeFunction();
+
+        console.log(parsed);
+    } catch(e) {
+        console.log("Bad String");
+    }
+}
+
 function main() {
-    const S = readLine();
+    const s = readLine();
+
+    parseAndPrint(s);
 }
