@@ -4,7 +4,25 @@ class AdvancedArithmetic(object):
 
 class Calculator(AdvancedArithmetic):
     def divisorSum(self, n):
-        pass
+        divisors = []
+        sum = None
+
+        itr = n
+        while itr <= n:
+            if n % itr == 0:
+                divisors.append(itr)
+
+            itr -= 1
+
+            if itr == 0:
+                break
+
+        if len(divisors) > 0:
+            sum = 0
+            for number in divisors:
+                sum += number
+
+        return sum
 
 
 n = int(input())
