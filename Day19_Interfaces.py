@@ -1,6 +1,7 @@
 class AdvancedArithmetic(object):
-    def divisorSum(n):
+    def divisorSum(self, n):
         raise NotImplementedError
+
 
 class Calculator(AdvancedArithmetic):
     def divisorSum(self, n):
