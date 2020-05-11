@@ -21,15 +21,24 @@ function readLine() {
 }
 
 /////////////// ignore above this line ////////////////////
-function bubbleSort() {
-    for (let i = 0; i < n; i++) {
-        // Track number of elements swapped during a single array traversal
-        let numberOfSwaps = 0;
-        
-        for (let j = 0; j < n - 1; j++) {
+function printResults(array, count){
+    console.log("Array is sorted in %i swaps.", count);
+    console.log("First Element:%i", array[0]);
+    console.log("Last Element:%i", array[array.length - 1]);
+}
+
+function bubbleSort(array) {
+    const copy = [...array];
+    let numberOfSwaps = 0;
+
+    for (let i = 0; i < copy.length; i++) {
+        for (let j = 0; j < (copy.length - 1); j++) {
             // Swap adjacent elements if they are in decreasing order
-            if (a[j] > a[j + 1]) {
-                swap(a[j], a[j + 1]);
+            if (copy[j] > copy[j + 1]) {
+                const temp = copy[j];
+                copy[j] = copy[j + 1];
+                copy[j + 1] = temp;
+
                 numberOfSwaps++;
             }
         }
@@ -39,12 +48,15 @@ function bubbleSort() {
             break;
         }
     }
+
+    return [copy, numberOfSwaps];
 }
 
 function main() {
-    var n = parseInt(readLine());
-    a = readLine().split(' ');
-    a = a.map(Number);
-    // Write Your Code Here
+    const n = parseInt(readLine());
+    const a = readLine().split(' ');
+    const ints = a.map(Number);
 
+    const [sorted, swapCount] = bubbleSort(ints);
+    printResults(sorted, swapCount);
 }
