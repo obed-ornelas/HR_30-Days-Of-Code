@@ -8,6 +8,14 @@ namespace Day21_Generics
 {
     class Program
     {
+        public static void PrintArray<T>(T[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine(array[i].ToString());
+            }
+        }
+
         static void Main(string[] args)
         {
             int n = Convert.ToInt32(Console.ReadLine());
