@@ -1,3 +1,5 @@
+"use strict";
+
 // Start of function Node
 function Node(data) {
     this.data = data;
@@ -31,32 +33,38 @@ function BinarySearchTree() {
         return this.root;
     };
     
-    // Start of function getHeight
     this.getHeight = function(root) {
+        if (!root) {
+            return -1;
+        }
 
-        // Add your code here
-
-    }; // End of function getHeight
-}; // End of function BinarySearchTree
+        const height = 1 + Math.max(this.getHeight(root.left), this.getHeight(root.right));
+        return height;
+    };
+};
 
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
-var _input = "";
+let _input = "";
 
 process.stdin.on('data', function (data) {
     _input += data;
 });
 
 process.stdin.on('end', function () {
-    var tree = new BinarySearchTree();
-    var root = null;
-    
-    var values = _input.split('\n').map(Number);
-    
-    for (var i = 1; i < values.length; i++) {
+    main();
+});
+
+function main() {
+    const tree = new BinarySearchTree();
+    let root = null;
+
+    const values = _input.split('\n').filter(input => input).map(Number);
+
+    for (let i = 1; i < values.length; i++) {
         root = tree.insert(root, values[i]);
     }
     
     console.log(tree.getHeight(root));
-});
+}
