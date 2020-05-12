@@ -1,66 +1,96 @@
+"use strict";
+
 process.stdin.resume();
-process.stdin.setEncoding('ascii');
+process.stdin.setEncoding("ascii");
 
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
+let input_stdin = "";
+let input_stdin_array = "";
+let input_currentline = 0;
 
-process.stdin.on('data', function (data) {
+process.stdin.on("data", function (data) {
     input_stdin += data;
 });
 
-process.stdin.on('end', function () {
-    input_stdin_array = input_stdin.split("\n");
-    main();    
+process.stdin.on("end", function () {
+    input_stdin_array = input_stdin.split("\n").filter(input => input);
+    main();
 });
+
 function readLine() {
     return input_stdin_array[input_currentline++];
 }
+
 function Node(data){
-    this.data=data;
-    this.next=null;
+    this.data = data;
+    this.next = null;
 }
+
 function Solution(){
 
-    this.removeDuplicates=function(head){
-      //Write your code here
+    this.removeDuplicates = function(head) {
+        const distinct = [];
+
+        let previousNode = null;
+        let currentNode = head;
+
+        while(currentNode){
+            if(distinct.indexOf(currentNode.data) === -1){
+                distinct.push(currentNode.data);
+
+                previousNode = currentNode;
+            } else {
+                previousNode.next = currentNode.next;
+            }
+
+            currentNode = currentNode.next;
+        }
+
+        return head;
     }
 
-	this.insert=function(head,data){
-        var p=new Node(data);
-        if(head==null){
-            head=p;
-        }
-        else if(head.next==null){
-            head.next=p;
-        }
-        else{
-            var start=head;
-            while(start.next!=null){
-                start=start.next;
+	this.insert = function(head, data) {
+        const node = new Node(data);
+
+        if(head == null) {
+            head = node;
+        } else if(head.next == null) {
+            head.next = node;
+        } else {
+            let start = head;
+
+            while(start.next != null) {
+                start = start.next;
             }
-            start.next=p;
+
+            start.next = node;
         }
+
         return head;
-        
     };
 
-	this.display=function(head){
-        var start=head;
-            while(start){
-                process.stdout.write(start.data+" ");
-                start=start.next;
-            }
+	this.display = function(head){
+        let start = head;
+        const toDisplay = [];
+
+        while(start){
+            toDisplay.push(start.data);
+            start = start.next;
+        }
+
+        console.log(toDisplay.map(int => int.toString()).join(" "));
     };
 }
+
 function main(){
-    var T=parseInt(readLine());
-    var head=null;
-    var mylist=new Solution();
-    for(i=0;i<T;i++){
-        var data=parseInt(readLine());
-        head=mylist.insert(head,data);
+    const T = parseInt(readLine());
+    let head = null;
+    const mylist = new Solution();
+
+    for(let i = 0; i < T; i++){
+        let data = parseInt(readLine());
+        head = mylist.insert(head,data);
     }
-    head=mylist.removeDuplicates(head);
+
+    head = mylist.removeDuplicates(head);
     mylist.display(head);
-}		
+}
