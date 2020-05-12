@@ -1,11 +1,27 @@
-// Start of function Node
+"use strict";
+
+function Queue() {
+    this.queue = [];
+}
+
+Queue.prototype.enqueue = function(element) {
+    this.queue.push(element);
+}
+
+Queue.prototype.dequeue = function() {
+    return this.queue.shift();
+}
+
+Queue.prototype.isEmpty = function() {
+    return this.queue.length === 0;
+}
+
 function Node(data) {
     this.data = data;
     this.left = null;
     this.right = null;
-}; // End of function Node
+};
 
-// Start of function BinarySearchTree
 function BinarySearchTree() {
     this.insert = function(root, data) {
         if (root === null) {
@@ -31,33 +47,52 @@ function BinarySearchTree() {
         return this.root;
     };
     
-    // Start of function levelOrder
     this.levelOrder = function(root) {
+        const queue = new Queue();
+        const traversed = []
 
-        // Add your code here
-        // To print values separated by spaces use process.stdout.write(someValue + ' ')
+        queue.enqueue(root);
 
-	}; // End of function levelOrder
-}; // End of function BinarySearchTree
+        while(!queue.isEmpty()){
+            const node = queue.dequeue();
+
+            traversed.push(node.data);
+
+            if (node.left){
+                queue.enqueue(node.left);
+            }
+
+            if (node.right){
+                queue.enqueue(node.right);
+            }
+        }
+
+        console.log(traversed.map(int => int.toString()).join(" "));
+	};
+};
 
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
-var _input = "";
+let _input = "";
 
 process.stdin.on('data', function (data) {
     _input += data;
 });
 
 process.stdin.on('end', function () {
-    var tree = new BinarySearchTree();
-    var root = null;
+    main();
+});
+
+function main(){
+    const tree = new BinarySearchTree();
+    let root = null;
     
-    var values = _input.split('\n').map(Number);
+    const values = _input.split('\n').filter(input => input).map(Number);
     
-    for (var i = 1; i < values.length; i++) {
+    for (let i = 1; i < values.length; i++) {
         root = tree.insert(root, values[i]);
     }
     
     tree.levelOrder(root);
-});
+}
