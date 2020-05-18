@@ -1,60 +1,61 @@
-'use strict';
+"use strict";
 
 process.stdin.resume();
-process.stdin.setEncoding('utf-8');
+process.stdin.setEncoding("utf-8");
 
-let inputString = '';
+let inputString = "";
 let currentLine = 0;
 
-process.stdin.on('data', stdin => {
-    inputString += stdin;
+process.stdin.on("data", (stdin) => {
+  inputString += stdin;
 });
 
-process.stdin.on('end', () => {
-    inputString = inputString.replace(/\s*$/, '')
-        .split('\n')
-        .map(str => str.replace(/\s*$/, ''));
+process.stdin.on("end", () => {
+  inputString = inputString
+    .replace(/\s*$/, "")
+    .split("\n")
+    .map(str => str.replace(/\s*$/, ""));
 
-    main();
+  main();
 });
 
 function readLine() {
-    return inputString[currentLine++];
+  return inputString[currentLine++];
 }
 
-function makeSet(max){
-    const set = [];
+function makeSet(max) {
+  const set = [];
 
-    for (let i = 1; i <= max; i++ ){
-        set.push(i);
-    }
+  for (let i = 1; i <= max; i++) {
+    set.push(i);
+  }
 
-    return set;
+  return set;
 }
 
 function findLowestBitwiseAnd(setMax, limit) {
-    const set = makeSet(setMax);
-    let lowestAnd = 0;
+  const set = makeSet(setMax);
+  let lowestAnd = 0;
 
-    for(let i = 0; i < set.length - 1; i++){
-        for(let j = i + 1; j < set.length; j++) {
-            const bitwiseAnd = set[i] & set[j];
+  for (let i = 0; i < set.length - 1; i++) {
+    for (let j = i + 1; j < set.length; j++) {
+      const bitwiseAnd = set[i] & set[j];
 
-            if(bitwiseAnd < limit && bitwiseAnd > lowestAnd) {
-                lowestAnd = bitwiseAnd;
-            }
-        }
+      if (bitwiseAnd < limit && bitwiseAnd > lowestAnd) {
+        lowestAnd = bitwiseAnd;
+      }
     }
+  }
 
-    return lowestAnd;
+  return lowestAnd;
 }
 
 function main() {
-    const tests = parseInt(readLine(), 10);
+  const tests = parseInt(readLine(), 10);
 
-    for (let i = 0; i < tests; i++) {
-        const [n, k] = readLine().split(' ');
+  for (let i = 0; i < tests; i++) {
+    const [n, k] = readLine().split(" ");
 
-        console.log(findLowestBitwiseAnd(n, k));
-    }
+    console.log(findLowestBitwiseAnd(n, k));
+  }
 }
