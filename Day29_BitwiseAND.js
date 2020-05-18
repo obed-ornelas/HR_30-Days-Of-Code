@@ -1,3 +1,33 @@
+/*
+  OO 05-18-2020
+
+  Task
+  ----------------------------------------------------------------------------------------------------------
+  Given set S = {1,2,3, ..., N}. Find two integers, 'A' and 'B' (where A < B), from set S such that the
+  value of 'A & B' is the maximum possible and also less than a given integer, 'K'. In this case, '&'
+  represents the bitwise AND operator.
+
+  Input Format
+  ----------------------------------------------------------------------------------------------------------
+  The first line contains an integer, 'T', the number of test cases.
+  Each of the 'T' subsequent lines defines a test case as 2 space-separated integers, 'N' and 'K',
+  respectively.
+
+  Sample Input
+  ----------------------------------------------------------------------------------------------------------
+  3
+  5 2
+  8 5
+  2 2
+
+  Sample Output
+  ----------------------------------------------------------------------------------------------------------
+  1
+  4
+  0
+
+*/
+
 "use strict";
 
 process.stdin.resume();
