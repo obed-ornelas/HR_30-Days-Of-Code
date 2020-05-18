@@ -6,8 +6,8 @@ process.stdin.setEncoding('utf-8');
 let inputString = '';
 let currentLine = 0;
 
-process.stdin.on('data', inputStdin => {
-    inputString += inputStdin;
+process.stdin.on('data', stdin => {
+    inputString += stdin;
 });
 
 process.stdin.on('end', _ => {
@@ -22,16 +22,33 @@ function readLine() {
     return inputString[currentLine++];
 }
 
+function isGmailAccount(email) {
+    const [_, domain] = email.split('@');
 
+    if (domain === 'gmail.com'){
+        return true;
+    }
+
+    return false;
+}
+
+function printUsers(users) {
+    for (let i = 0; i < users.length; i++) {
+        console.log(users[i]);
+    }
+}
 
 function main() {
-    const N = parseInt(readLine(), 10);
+    const rows = parseInt(readLine(), 10);
+    const users = [];
 
-    for (let NItr = 0; NItr < N; NItr++) {
-        const firstNameEmailID = readLine().split(' ');
+    for (let i = 0; i < rows; i++) {
+        const [firstName, emaiID] = readLine().split(' ');
 
-        const firstName = firstNameEmailID[0];
-
-        const emailID = firstNameEmailID[1];
+        if (isGmailAccount(emaiID)){
+            users.push(firstName);
+        }
     }
+
+    printUsers(users.sort());
 }
