@@ -9,14 +9,14 @@ def minimum_index(seq):
 
     return min_idx
 
+
 class TestDataEmptyArray(object):
-    
     @staticmethod
     def get_array():
         return []
 
-class TestDataUniqueValues(object):
 
+class TestDataUniqueValues(object):
     @staticmethod
     def get_array():
         return [5, 3, 2]
@@ -25,8 +25,8 @@ class TestDataUniqueValues(object):
     def get_expected_result():
         return 2
 
-class TestDataExactlyTwoDifferentMinimums(object):
 
+class TestDataExactlyTwoDifferentMinimums(object):
     @staticmethod
     def get_array():
         return [5, 3, 2, 2, 9]
@@ -72,8 +72,8 @@ def TestWithExactyTwoDifferentMinimums():
 
     assert result == expected_result
 
+
 TestWithEmptyArray()
 TestWithUniqueValues()
 TestWithExactyTwoDifferentMinimums()
 print("OK")
-
